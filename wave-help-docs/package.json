@@ -12,6 +12,8 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.23",
+    "contentful": "^10.0.0",
+    "lodash": "^4.17.21",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "react": "^17.0.2",
@@ -46,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.192",
     "@types/react-router-dom": "^5.3.3"
   }
 }

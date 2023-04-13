@@ -3,7 +3,8 @@ import {
   CONTENTFUL_BASE_URL,
   CONTENTFUL_ENVIRONMENT_ID,
   CONTENTFUL_SPACE_ID,
-} from "@/environment";
+} from "../../environment";
+
 import { Asset } from "contentful";
 
 export async function getAsset(id: string) {

@@ -1,4 +1,5 @@
-import { promiseLog } from "@/helpers/promise";
+
+import { promiseLog } from "../helpers/promise";
 import { useEffect } from "react";
 import useStatus, { Status, SuccessStatus } from "./useStatus";
 
@@ -11,10 +12,10 @@ export default function usePromise<T>(createPromise: () => Promise<T>, label: st
 
   useEffect(() => {
     promiseLog(createPromise(), label).then(
-      (result) => {
+      (result: T) => {
         setStatus({ type: "SUCCESS", result });
       },
-      (error) => {
+      (error: Error) => {
         setStatus({ type: "FAILURE", error });
       }
     );

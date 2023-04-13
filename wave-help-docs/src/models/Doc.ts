@@ -9,6 +9,10 @@ export default interface Doc {
   subtitle?: string;
   body: Document;
   audience: Entry<Audience>;
+  fields: {
+    description: string;
+  };
+  contentTypeId: string;
 }
 
 export function docValidate(value: unknown): Doc {

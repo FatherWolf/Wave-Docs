@@ -4,8 +4,9 @@ import {
   CONTENTFUL_BASE_URL,
   CONTENTFUL_ENVIRONMENT_ID,
   CONTENTFUL_SPACE_ID,
-} from "@/environment";
-import Doc from "@/models/Doc";
+} from "../react-app-env";
+import Doc from "../models/Doc";
+
 import { Entry, EntryCollection } from "contentful";
 
 export async function docsListForAudience() {
