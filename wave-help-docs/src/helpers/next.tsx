@@ -1,4 +1,6 @@
+
 import { arrayFilterBoolean } from "../helpers/array";
+
 
 export function createHead({ title, description }: { title?: string | string[]; description?: string } = {}) {
   return function Head() {

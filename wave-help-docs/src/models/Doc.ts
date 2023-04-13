@@ -13,7 +13,6 @@ export default interface Doc {
     description: string;
   };
   contentTypeId: string;
-
 }
 
 export function docValidate(value: unknown): Doc {
