@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@mui/styles';
+import { DocEntry } from '../models/Doc';
 
 const useStyles = makeStyles({
   waveBites: {
@@ -20,23 +21,14 @@ const useStyles = makeStyles({
   },
 });
 
-// New fake data
-const newFakeData = [
-  { id: '6', title: 'New Lorem ipsum dolor sit amet' },
-  { id: '7', title: 'New Consectetur adipiscing elit' },
-  { id: '8', title: 'New Integer nec odio' },
-  { id: '9', title: 'New Praesent libero' },
-  { id: '10', title: 'New Sed cursus ante dapibus diam' },
-];
-
 interface HeaderProps {
   onTitleClick: (id: string) => void;
+  menuItems: DocEntry[];
 }
 
-const Header: React.FC<HeaderProps> = ({ onTitleClick }) => {
+const Header: React.FC<HeaderProps> = ({ onTitleClick, menuItems }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [menuItems, setMenuItems] = React.useState(newFakeData);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -73,13 +65,13 @@ const Header: React.FC<HeaderProps> = ({ onTitleClick }) => {
         >
           {menuItems.map((item) => (
             <MenuItem
-              key={item.id}
+              key={item.sys.id}
               onClick={() => {
-                onTitleClick(item.id);
+                onTitleClick(item.sys.id);
                 handleClose();
               }}
             >
-              {item.title}
+              {item.fields.title}
             </MenuItem>
           ))}
         </Menu>

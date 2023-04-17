@@ -1,27 +1,29 @@
-// Menu.tsx
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, List, ListItem } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/system';
+import { Entry } from 'contentful';
+import { Doc, DocEntry } from '../models/Doc';
+import { fetchDocs } from '../utils/fetchDocs';
 
 interface MenuProps {
   onTitleClick: (id: string) => void;
 }
 
-// Fake data with Lorem Ipsum titles
-const fakeData = [
-  { id: '1', title: 'Lorem ipsum dolor sit amet' },
-  { id: '2', title: 'Consectetur adipiscing elit' },
-  { id: '3', title: 'Integer nec odio' },
-  { id: '4', title: 'Praesent libero' },
-  { id: '5', title: 'Sed cursus ante dapibus diam' },
-];
-
 const Menu: React.FC<MenuProps> = ({ onTitleClick }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  const [docs, setDocs] = useState<DocEntry[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const fetchedDocs = await fetchDocs();
+      setDocs(fetchedDocs);
+    }
+    fetchData();
+  }, []);
+  console.log('docs', docs);
   if (isMobile) {
     return null;
   }
@@ -35,17 +37,17 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick }) => {
         bgcolor: 'grey.600',
         position: 'fixed',
         left: 8,
-        top: 72, // Change the value to the height of your header
+        top: 72,
         overflowY: 'auto',
         py: 2,
         px: 3,
       }}
     >
       <List component="ul" disablePadding>
-        {fakeData.map((item) => (
-          <ListItem key={item.id} component="li">
+        {docs.map((doc) => (
+          <ListItem key={doc.sys.id} component="li">
             <Button
-              onClick={() => onTitleClick(item.id)}
+              onClick={() => onTitleClick(doc.sys.id)}
               sx={{
                 textAlign: 'left',
                 fontSize: '16px',
@@ -57,7 +59,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick }) => {
                 color: 'white',
               }}
             >
-              {item.title}
+              {doc.fields.title}
             </Button>
           </ListItem>
         ))}

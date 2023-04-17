@@ -1,49 +1,32 @@
-
-import './App.css';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import { Box, Grid } from '@mui/material';
-import Menu from './components/Menu';
+import React, { useState, useEffect } from 'react';
+import { Entry } from 'contentful';
+import { Doc, DocEntry } from './models/Doc';
 import Header from './components/Header';
+import Menu from './components/Menu';
+import { fetchDocs } from './utils/fetchDocs';
 
+const App: React.FC = () => {
+  const [docs, setDocs] = useState<DocEntry[]>([]);
 
-function App() {
-  const [selectedTitleId, setSelectedTitleId] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchDocs();
+      setDocs(data);
+    };
+
+    fetchData();
+  }, []);
 
   const handleTitleClick = (id: string) => {
-    setSelectedTitleId(id);
+    console.log('Clicked:', id);
   };
 
   return (
-    <Router>
-      <Box display="flex" flexDirection="column" minHeight="100vh">
-        <Header onTitleClick={handleTitleClick} />
-        <Grid container>
-          <Grid item xs={12}>
-            <Grid container>
-              <Grid item xs={12} md={3} lg={2}>
-                <Menu onTitleClick={handleTitleClick} />
-              </Grid>
-              <Grid item xs={12} md={9} lg={10}>
-                <Box flexGrow={1} mt={4}>
-                  <Routes>
-                    <Route
-                      path="/"
-                      element={<Home selectedTitleId={selectedTitleId} />}
-                    />
-                    {/* <Route path="/about" element={<AboutPage />} />
-                    <Route path="/services" element={<ServicesPage />} />
-                    <Route path="/contact" element={<ContactPage />} /> */}
-                  </Routes>
-                </Box>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Box>
-    </Router>
+    <div>
+      <Header onTitleClick={handleTitleClick} menuItems={docs} />
+      <Menu onTitleClick={handleTitleClick} />
+    </div>
   );
-}
+};
 
 export default App;
