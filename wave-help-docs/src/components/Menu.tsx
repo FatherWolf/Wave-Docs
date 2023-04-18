@@ -31,7 +31,9 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick }) => {
     <Box
       component="nav"
       sx={{
-        width: 250,
+        width: 'min-content',
+        minWidth: 250,
+        paddingRight: '1rem',
         height: '100%',
         bgcolor: 'grey.600',
         position: 'fixed',
