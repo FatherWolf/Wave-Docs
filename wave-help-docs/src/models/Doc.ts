@@ -1,15 +1,15 @@
 import { Document } from '@contentful/rich-text-types';
-import { Entry } from 'contentful';
+import { Entry, Asset } from 'contentful';
 import Audience from './Audience';
 import { objectValidate } from './Object';
 import { stringValidate } from './String';
-import { EntryCollection } from 'contentful';
 
 export interface Doc {
   title: string;
   subtitle?: string;
   body: Document;
   audience: Entry<Audience>;
+  assets: Asset[]; // Update this line
 }
 
 export interface DocFields extends Doc {

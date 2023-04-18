@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "scoopm-development"
+  },
+  "targets": {
+    "scoopm-development": {
+      "hosting": {
+        "wavebites-help-admins": [
+          "wavebites-help-admins"
+        ]
+      }
+    }
+  }
+}
