@@ -1,58 +1,50 @@
-// HomePage.tsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
+import { Document } from '@contentful/rich-text-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+
+import { DocEntry } from '../models/Doc';
 
 interface HomePageProps {
   selectedTitleId: string | null;
+  docs: DocEntry[];
 }
 
-// Fake data with Lorem Ipsum content
-const fakeData = [
-  {
-    id: '1',
-    title: 'Lorem ipsum dolor sit amet',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+const richTextOptions = {
+  renderMark: {
+    [MARKS.BOLD]: (text: React.ReactNode) => <strong>{text}</strong>,
+    [MARKS.ITALIC]: (text: React.ReactNode) => <em>{text}</em>,
+    [MARKS.UNDERLINE]: (text: React.ReactNode) => <u>{text}</u>,
   },
-  {
-    id: '2',
-    title: 'Consectetur adipiscing elit',
-    content: 'Vivamus lacinia odio vitae vestibulum.',
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (_node: any, children: React.ReactNode) => (
+      <p>{children}</p>
+    ),
   },
-  {
-    id: '3',
-    title: 'Integer nec odio',
-    content: 'Sed non mauris vitae erat consequat auctor eu in elit.',
-  },
-  {
-    id: '4',
-    title: 'Praesent libero',
-    content: 'Class aptent taciti sociosqu ad litora torquent.',
-  },
-  {
-    id: '5',
-    title: 'Sed cursus ante dapibus diam',
-    content: 'Nam nec tellus a odio tincidunt auctor a ornare odio.',
-  },
-];
+};
 
-const Home: React.FC<HomePageProps> = ({ selectedTitleId }) => {
-  const [selectedContent, setSelectedContent] = useState<string>('');
+const Home: React.FC<HomePageProps> = ({ selectedTitleId, docs }) => {
+  const [selectedContent, setSelectedContent] = useState<Document | null>(null);
 
   // Update the content when the selected title changes
-  React.useEffect(() => {
+  console.log('selectedTitleId', selectedTitleId);
+  useEffect(() => {
     if (selectedTitleId) {
-      const selected = fakeData.find((item) => item.id === selectedTitleId);
-      setSelectedContent(selected?.content || '');
+      const selected = docs.find((doc) => doc.sys.id === selectedTitleId);
+      setSelectedContent(selected?.fields.body || null);
     } else {
-      setSelectedContent('');
+      setSelectedContent(null);
     }
-  }, [selectedTitleId]);
+  }, [selectedTitleId, docs]);
 
   return (
     <div>
       {selectedContent ? (
-        <Typography variant="body1">{selectedContent}</Typography>
+        <Typography variant="body1">
+          {selectedContent.content &&
+            documentToReactComponents(selectedContent, richTextOptions)}
+        </Typography>
       ) : (
         <Typography variant="h5">
           Select a title from the side navigation.

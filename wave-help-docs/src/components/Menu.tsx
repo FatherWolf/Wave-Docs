@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, List, ListItem } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/system';
-import { Entry } from 'contentful';
-import { Doc, DocEntry } from '../models/Doc';
+import { DocEntry } from '../models/Doc';
 import { fetchDocs } from '../utils/fetchDocs';
 
 interface MenuProps {
