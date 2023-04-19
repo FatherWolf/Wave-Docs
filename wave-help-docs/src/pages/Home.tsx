@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { Document } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
-import { Asset } from 'contentful';
+import EmbeddedAsset from '../components/EmbeddedAsset';
 
 import { DocEntry } from '../models/Doc';
 
@@ -23,33 +23,10 @@ const richTextOptions = {
       <p>{children}</p>
     ),
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-      const asset = node.data.target as Asset;
+      const assetId = node.data.target.sys.id;
+      // console.log("asset id", assetId);
 
-      if (
-        !asset ||
-        !asset.fields ||
-        !asset.fields.file ||
-        !asset.fields.title
-      ) {
-        return null;
-      }
-
-      const file = asset.fields.file as Record<string, { url: string }>;
-      const title = asset.fields.title as Record<string, string>;
-
-      const url = file['en-US']?.url;
-      const altText = title['en-US'];
-
-      return (
-        <img
-          src={url}
-          alt={altText}
-          style={{
-            maxWidth: '100%',
-            height: 'auto',
-          }}
-        />
-      );
+      return <EmbeddedAsset assetId={assetId} />;
     },
   },
 };
