@@ -10,6 +10,9 @@ export interface Doc {
   body: Document;
   audience: Entry<Audience>;
   assets: Asset[]; // Update this line
+  isCustomerDoc: boolean;
+  isRestaurantDoc: boolean;
+  isAdminDoc: boolean;
 }
 
 export interface DocFields extends Doc {
