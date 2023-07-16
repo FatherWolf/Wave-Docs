@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, List, ListItem, Typography } from '@mui/material';
+import { Box, Button, List, ListItem, Typography, Collapse } from '@mui/material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/system';
 import { DocEntry } from '../models/Doc';
@@ -17,6 +19,13 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const [docs, setDocs] = useState<DocEntry[]>([]);
+  const [openAdmin, setOpenAdmin] = useState(true);
+  const [openRestaurant, setOpenRestaurant] = useState(true);
+  const [openEndUser, setOpenEndUser] = useState(true);
+
+  const handleToggle = (setOpen: React.Dispatch<React.SetStateAction<boolean>>) => () => {
+    setOpen(open => !open);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -70,14 +79,35 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
       }}
     >
       <List component="ul" disablePadding>
-        <Typography variant="h6" color="white">Admin</Typography>
-        {renderDocs(adminDocs)}
+        <ListItem onClick={handleToggle(setOpenAdmin)}>
+          <Typography variant="h6" color="white">Admin</Typography>
+          {openAdmin ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openAdmin} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {renderDocs(adminDocs)}
+          </List>
+        </Collapse>
 
-        <Typography variant="h6" color="white">Restaurant</Typography>
-        {renderDocs(restaurantDocs)}
+        <ListItem onClick={handleToggle(setOpenRestaurant)}>
+          <Typography variant="h6" color="white">Restaurant</Typography>
+          {openRestaurant ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openRestaurant} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {renderDocs(restaurantDocs)}
+          </List>
+        </Collapse>
 
-        <Typography variant="h6" color="white">End User</Typography>
-        {renderDocs(endUserDocs)}
+        <ListItem onClick={handleToggle(setOpenEndUser)}>
+          <Typography variant="h6" color="white">End User</Typography>
+          {openEndUser ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openEndUser} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {renderDocs(endUserDocs)}
+          </List>
+        </Collapse>
       </List>
     </Box>
   );
