@@ -13,10 +13,23 @@ const App: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  const [adminDocs, setAdminDocs] = useState<DocEntry[]>([]);
+  const [restaurantDocs, setRestaurantDocs] = useState<DocEntry[]>([]);
+  const [endUserDocs, setEndUserDocs] = useState<DocEntry[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchDocs();
       setDocs(data);
+
+      // Categorize docs
+      const admins = data.filter(doc => doc.fields.isAdminDoc);
+      const restaurants = data.filter(doc => doc.fields.isRestaurantDoc);
+      const endUsers = data.filter(doc => doc.fields.isCustomerDoc);
+
+      setAdminDocs(admins);
+      setRestaurantDocs(restaurants);
+      setEndUserDocs(endUsers);
     };
 
     fetchData();
@@ -35,7 +48,12 @@ const App: React.FC = () => {
         <Grid container spacing={isMobile ? 0 : 2}>
           {!isMobile && (
             <Grid item md={3}>
-              <Menu onTitleClick={handleTitleClick} />
+               <Menu 
+                onTitleClick={handleTitleClick} 
+                adminDocs={adminDocs} 
+                restaurantDocs={restaurantDocs} 
+                endUserDocs={endUserDocs} 
+              />
             </Grid>
           )}
           <Grid item xs={12} md={9}>
