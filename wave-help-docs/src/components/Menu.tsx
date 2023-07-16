@@ -19,9 +19,9 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const [docs, setDocs] = useState<DocEntry[]>([]);
-  const [openAdmin, setOpenAdmin] = useState(true);
-  const [openRestaurant, setOpenRestaurant] = useState(true);
-  const [openEndUser, setOpenEndUser] = useState(true);
+  const [openAdmin, setOpenAdmin] = useState(false);
+  const [openRestaurant, setOpenRestaurant] = useState(false);
+  const [openEndUser, setOpenEndUser] = useState(false);
 
   const handleToggle = (setOpen: React.Dispatch<React.SetStateAction<boolean>>) => () => {
     setOpen(open => !open);
