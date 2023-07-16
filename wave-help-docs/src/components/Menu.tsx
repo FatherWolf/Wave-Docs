@@ -80,7 +80,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
     >
       <List component="ul" disablePadding>
         <ListItem onClick={handleToggle(setOpenAdmin)}>
-          <Typography variant="h6" color="white">Admin</Typography>
+          <Typography variant="h6" color="#89CFF0">Admin</Typography>
           {openAdmin ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openAdmin} timeout="auto" unmountOnExit>
@@ -90,7 +90,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
         </Collapse>
 
         <ListItem onClick={handleToggle(setOpenRestaurant)}>
-          <Typography variant="h6" color="white">Restaurant</Typography>
+          <Typography variant="h6" color="#98FB98">Restaurant</Typography>
           {openRestaurant ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openRestaurant} timeout="auto" unmountOnExit>
@@ -100,7 +100,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
         </Collapse>
 
         <ListItem onClick={handleToggle(setOpenEndUser)}>
-          <Typography variant="h6" color="white">End User</Typography>
+          <Typography variant="h6" color="#FFA500">End User</Typography>
           {openEndUser ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openEndUser} timeout="auto" unmountOnExit>

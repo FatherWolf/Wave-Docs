@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  AppBar,
-  Box,
-  IconButton,
-  Toolbar,
-  Typography,
-  Menu,
-  MenuItem,
-} from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar, Typography, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { makeStyles } from '@mui/styles';
 import { DocEntry } from '../models/Doc';
 
@@ -18,6 +11,15 @@ const useStyles = makeStyles({
   },
   help: {
     color: '#000', // Black
+  },
+  adminDot: {
+    color: '#89CFF0',
+  },
+  restaurantDot: {
+    color: '#98FB98',
+  },
+  endUserDot: {
+    color: '#FFA500',
   },
 });
 
@@ -71,6 +73,9 @@ const Header: React.FC<HeaderProps> = ({ onTitleClick, menuItems }) => {
                 handleClose();
               }}
             >
+              {item.fields.isAdminDoc && <FiberManualRecordIcon className={classes.adminDot} />}
+              {item.fields.isRestaurantDoc && <FiberManualRecordIcon className={classes.restaurantDot} />}
+              {item.fields.isCustomerDoc && <FiberManualRecordIcon className={classes.endUserDot} />}
               {item.fields.title}
             </MenuItem>
           ))}
