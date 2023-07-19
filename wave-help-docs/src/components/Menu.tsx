@@ -69,7 +69,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
         minWidth: 250,
         paddingRight: '1rem',
         height: '100%',
-        bgcolor: 'grey.600',
+        bgcolor: '#333333',
         position: 'fixed',
         left: 8,
         top: 72,
