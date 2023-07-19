@@ -69,7 +69,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
         minWidth: 250,
         paddingRight: '1rem',
         height: '100%',
-        bgcolor: 'grey.600',
+        bgcolor: '#333333',
         position: 'fixed',
         left: 8,
         top: 72,
@@ -80,7 +80,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
     >
       <List component="ul" disablePadding>
         <ListItem onClick={handleToggle(setOpenAdmin)}>
-          <Typography variant="h6" color="#89CFF0">Admin</Typography>
+          <Typography variant="h6" color="#4D90BD">Admin</Typography>
           {openAdmin ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openAdmin} timeout="auto" unmountOnExit>
@@ -90,7 +90,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
         </Collapse>
 
         <ListItem onClick={handleToggle(setOpenRestaurant)}>
-          <Typography variant="h6" color="#98FB98">Restaurant</Typography>
+          <Typography variant="h6" color="#5CA663">Restaurant</Typography>
           {openRestaurant ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openRestaurant} timeout="auto" unmountOnExit>
@@ -100,7 +100,7 @@ const Menu: React.FC<MenuProps> = ({ onTitleClick, adminDocs, restaurantDocs, en
         </Collapse>
 
         <ListItem onClick={handleToggle(setOpenEndUser)}>
-          <Typography variant="h6" color="#FFA500">End User</Typography>
+          <Typography variant="h6" color="#A36900">End User</Typography>
           {openEndUser ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openEndUser} timeout="auto" unmountOnExit>

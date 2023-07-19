@@ -5,7 +5,10 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { makeStyles } from '@mui/styles';
 import { DocEntry } from '../models/Doc';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: '#f0f0f0', // Light gray
+  },
   waveBites: {
     color: '#3CB371', // Seafoam green
   },
@@ -13,15 +16,16 @@ const useStyles = makeStyles({
     color: '#000', // Black
   },
   adminDot: {
-    color: '#89CFF0',
+    color: '#4D90BD',
   },
   restaurantDot: {
-    color: '#98FB98',
+    color: '#5CA663',
   },
   endUserDot: {
-    color: '#FFA500',
+    color: '#A36900',
   },
-});
+}));
+
 
 interface HeaderProps {
   onTitleClick: (id: string) => void;
@@ -41,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ onTitleClick, menuItems }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: '#f0f0f0' }}>
       <Toolbar>
         <Typography variant="h6" className={classes.waveBites}>
           WaveBites
@@ -52,11 +56,10 @@ const Header: React.FC<HeaderProps> = ({ onTitleClick, menuItems }) => {
         <Box flexGrow={1} />
         <IconButton
           edge="end"
-          color="inherit"
           aria-label="menu"
           onClick={handleClick}
         >
-          <MenuIcon />
+          <MenuIcon sx={{ color: '#000' }} />
         </IconButton>
         <Menu
           id="simple-menu"
@@ -84,5 +87,6 @@ const Header: React.FC<HeaderProps> = ({ onTitleClick, menuItems }) => {
     </AppBar>
   );
 };
+
 
 export default Header;
