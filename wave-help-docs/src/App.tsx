@@ -45,28 +45,30 @@ const App: React.FC = () => {
     >
       <Header onTitleClick={handleTitleClick} menuItems={docs} />
       <Container maxWidth="lg" style={{ flexGrow: 1 }}>
-        <Grid container spacing={isMobile ? 0 : 2}>
+        <div style={{ display: 'flex' }}>
           {!isMobile && (
-            <Grid item md={3}>
-               <Menu 
-                onTitleClick={handleTitleClick} 
-                adminDocs={adminDocs} 
-                restaurantDocs={restaurantDocs} 
-                endUserDocs={endUserDocs} 
+            <div style={{ minWidth: '250px', height: '100vh', position: 'sticky', top: 0 }}>
+              <Menu
+                onTitleClick={handleTitleClick}
+                adminDocs={adminDocs}
+                restaurantDocs={restaurantDocs}
+                endUserDocs={endUserDocs}
               />
-            </Grid>
-          )}
-          <Grid item xs={12} md={9}>
-            <div
-              style={{
-                padding: isMobile ? '1rem 0' : '1rem',
-              }}
-            >
-              <Home selectedTitleId={selectedTitleId} docs={docs} />
             </div>
-          </Grid>
-        </Grid>
+          )}
+          <div style={{ flex: 1, marginLeft: isMobile ? '0' : '20px' }}>
+            <Grid container spacing={isMobile ? 0 : 2}>
+              <Grid item xs={12}>
+                <div style={{ padding: isMobile ? '1rem 0' : '1rem' }}>
+                  <Home selectedTitleId={selectedTitleId} docs={docs} />
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+
+        </div>
       </Container>
+
     </div>
   );
 };
