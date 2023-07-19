@@ -13,13 +13,13 @@ const useStyles = makeStyles({
     color: '#000', // Black
   },
   adminDot: {
-    color: '#89CFF0',
+    color: '#4D90BD',
   },
   restaurantDot: {
-    color: '#98FB98',
+    color: '#5CA663',
   },
   endUserDot: {
-    color: '#FFA500',
+    color: '#A36900',
   },
 });
 
